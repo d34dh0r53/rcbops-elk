@@ -394,7 +394,7 @@ kibana_apt_repos:
   - { repo: "deb {{ kibana_apt_repo_url }} stable main", state: "present" }
 
 kibana_apt_keys:
-  - { url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch" state: "present" }
+  - { url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch", state: "present" }
 
 kibana_pip_packages:
   - httplib2  # NOTE(sigmavirus24): Need this for the uri module
