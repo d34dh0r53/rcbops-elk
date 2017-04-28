@@ -15,41 +15,22 @@
 
 # Elasticsearch Variables
 
-# Used for upgrades
-elasticsearch_legacy_apt_repo_url: "http://packages.elasticsearch.org/elasticsearch/1.7/debian"
-
-# Used for upgrades
-elasticsearch_legacy_apt_repos:
-  - repo: "deb {{ elasticsearch_legacy_apt_repo_url }} stable main"
-    state: "present"
-
-# use -e 'logging_upgrade=true' to upgrade logging components
-logging_upgrade: false
-
-# use -e 'force_upgrade=true' for force the upgrade to happen regardless of the pre-flight checks
-force_upgrade: false
-
-elasticsearch_apt_repo_url: "http://packages.elastic.co/elasticsearch/2.x/debian"
+elasticsearch_apt_repo_url: "https://artifacts.elastic.co/packages/5.x/apt"
 
 elasticsearch_apt_repos:
   - repo: "deb {{ elasticsearch_apt_repo_url }} stable main"
     state: "present"
 
 elasticsearch_apt_keys:
-  - url: "http://packages.elastic.co/GPG-KEY-elasticsearch"
+  - url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
     state: "present"
 
-elasticsearch_version: 2.4.1
-
-elasticsearch_reindex_version: 1.7.5
+elasticsearch_version: 5.3.2
 
 elasticsearch_pip_packages:
   - elasticsearch>=2.0.0,<3.0.0
   - elasticsearch-curator==4.0.4
   - httplib2
-
-elasticsearch_upgrade_pip_packages:
-  - requests
 
 # This sets the cluster name
 elasticsearch_cluster: openstack
@@ -84,9 +65,9 @@ elasticsearch_index_number_of_replicas: 0
 filebeat_apt_gpg_keys:
   # NOTE(sigmavirus24): Yes, it really is this key:
   # https://www.elastic.co/guide/en/beats/libbeat/current/setup-repositories.html
-  - { url: "https://packages.elasticsearch.org/GPG-KEY-elasticsearch", state: present }
+  - { url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch", state: present }
 
-filebeat_apt_repo_url: "http://packages.elastic.co/beats/apt"
+filebeat_apt_repo_url: "https://artifacts.elastic.co/packages/5.x/apt"
 
 filebeat_apt_repos:
   - { repo: "deb {{ filebeat_apt_repo_url }} stable main", state: present }
@@ -407,13 +388,13 @@ filebeat_configuration_files:
 
 # Kibana Variables
 
-kibana_apt_repo_url: "http://packages.elastic.co/kibana/4.5/debian"
+kibana_apt_repo_url: "https://artifacts.elastic.co/packages/5.x/apt"
 
 kibana_apt_repos:
   - { repo: "deb {{ kibana_apt_repo_url }} stable main", state: "present" }
 
 kibana_apt_keys:
-  - { url: "http://packages.elastic.co/GPG-KEY-elasticsearch", state: "present" }
+  - { url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch" state: "present" }
 
 kibana_pip_packages:
   - httplib2  # NOTE(sigmavirus24): Need this for the uri module
@@ -459,7 +440,7 @@ kibana_directories:
 # Logstash Variables
 
 # the apt repository url to use for installing logstash from
-logstash_apt_repo_url: "http://packages.elastic.co/logstash/2.3/debian"
+logstash_apt_repo_url: "https://artifacts.elastic.co/packages/5.x/apt"
 
 # the apt repository to use for installing logstash from
 logstash_apt_repos:
@@ -468,7 +449,7 @@ logstash_apt_repos:
 
 # the apt repository key url
 logstash_apt_keys:
-  - url: "https://packages.elastic.co/GPG-KEY-elasticsearch"
+  - url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
     state: "present"
 
 # the listening port for rsyslog events
