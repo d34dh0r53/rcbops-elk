@@ -19,6 +19,8 @@
     state: present
     update_cache: yes
     cache_valid_time: 600
+    environment:
+      ES_SKIP_SET_KERNEL_PARAMETERS: true
   register: install_apt_packages
   until: install_apt_packages | success
   retries: 5
