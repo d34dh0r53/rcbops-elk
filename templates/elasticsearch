@@ -11,7 +11,7 @@
 {%     set elasticsearch_heap_size_mb = 16384 %}
 {%   endif %}
 {% endif %}
-ES_XMS={{ elasticsearch_heap_size_mb|int }}m
+{% set es_xms = {{ elasticsearch_heap_size_mb|int }}m %}
 
 # Heap new generation
 #ES_HEAP_NEWSIZE=
@@ -31,7 +31,7 @@ ES_XMS={{ elasticsearch_heap_size_mb|int }}m
 {% if elasticsearch_max_locked_memory_mb is not defined %}
 {%   set elasticsearch_max_locked_memory_mb = elasticsearch_heap_size_mb %}
 {% endif %}
-ES_XMX={{ elasticsearch_max_locked_memory_mb }}
+{% set es_xmx = {{ elasticsearch_max_locked_memory_mb }}m %}
 
 # Maximum number of VMA (Virtual Memory Areas) a process can own
 #MAX_MAP_COUNT=262144
@@ -52,7 +52,7 @@ ES_XMX={{ elasticsearch_max_locked_memory_mb }}
 #CONF_FILE=/etc/elasticsearch/elasticsearch.yml
 
 # Additional Java OPTS
-ES_JAVA_OPTS=-Xms${ES_XMS} -Xmx${ES_XMX}
+ES_JAVA_OPTS=-Xms{{ es_xms }} -Xmx{{ es_xmx }}
 
 # Configure restart on package upgrade (true, every other setting will lead to
 # not restarting)
