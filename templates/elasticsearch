@@ -52,7 +52,7 @@ ES_MMX = {{ elasticsearch_max_locked_memory_mb }}
 #CONF_FILE=/etc/elasticsearch/elasticsearch.yml
 
 # Additional Java OPTS
-ES_JAVA_OPTS=-Xms{{ elasticsearch_heap_size_mb|int }}m -Xmx{{ elasticsearch_max_locked_memory_mb }}
+ES_JAVA_OPTS=-Xms{{ elasticsearch_heap_size_mb|int }}m -Xmx{{ elasticsearch_heap_size_mb|int }}m
 
 # Configure restart on package upgrade (true, every other setting will lead to
 # not restarting)
