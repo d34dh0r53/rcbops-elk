@@ -26,17 +26,8 @@
     group: "elasticsearch"
   with_items:
     - elasticsearch.yml
-    - logging.yml
-  notify: Restart ElasticSearch
-
-- name: Deploy ElasticSearch service configuration file
-  template:
-    src: "{{ item }}"
-    dest: "/etc/default/{{ item }}"
-    owner: "root"
-    group: "root"
-  with_items:
-    - elasticsearch
+    - log4j2.properties
+    - jvm.options
   notify: Restart ElasticSearch
 
 - name: Restart ElasticSearch before proceeding
