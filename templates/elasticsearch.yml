@@ -1,5 +1,4 @@
 cluster.name: {{ elasticsearch_cluster }}
-node.name: {{ hostvars[inventory_hostname] }}
 bootstrap.mlockall: {{ elasticsearch_bootstrap_mlockall }}
 network.bind_host: 127.0.0.1,{{ hostvars[inventory_hostname]['container_address'] }}
 
