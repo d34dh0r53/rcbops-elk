@@ -1,0 +1,11 @@
+# Heap Size  (defaults to 256m min, 1g max)
+{% if elasticsearch_heap_size_mb is not defined %}
+{%   set memtotal_mb = hostvars[inventory_hostname]['ansible_memtotal_mb']|int %}
+{%   if memtotal_mb <= 32768 %}
+{%     set elasticsearch_heap_size_mb = memtotal_mb // 2 %}
+{%   else %}
+{%     set elasticsearch_heap_size_mb = 16384 %}
+{%   endif %}
+{% endif %}
+-Xms{{ elasticsearch_heap_size_mb|int }}m
+-Xmx{{ elasticsearch_heap_size_mb|int }}m
