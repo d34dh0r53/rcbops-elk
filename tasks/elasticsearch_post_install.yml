@@ -25,9 +25,9 @@
     owner: "elasticsearch"
     group: "elasticsearch"
   with_items:
-    - elasticsearch.yml.j2
-    - log4j2.properties.j2
-    - jvm.options.j2
+    - "elasticsearch.yml.j2"
+    - "log4j2.properties.j2"
+    - "jvm.options.j2"
   notify: Restart ElasticSearch
 
 - name: Restart ElasticSearch before proceeding
