@@ -25,6 +25,7 @@
   delay: 2
   tags:
     - kibana-apt-keys
+    - kibana-install
 
 - name: Add kibana apt repositories
   apt_repository:
@@ -39,3 +40,4 @@
   delay: 2
   tags:
     - kibana-apt-repos
+    - kibana-install

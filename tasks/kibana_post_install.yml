@@ -17,6 +17,8 @@
   service:
     name: kibana
     enabled: yes
+  tags:
+    - kibana-install
 
 - name: Deploy Kibana configuration files
   template:
@@ -25,6 +27,8 @@
     owner: "root"
     group: "root"
   notify: Restart Kibana
+  tags:
+    - kibana-install
 
 - name: Deploy Kibana service configuration file
   template:
@@ -33,14 +37,20 @@
     owner: "root"
     group: "root"
   notify: Restart Kibana
+  tags:
+    - kibana-install
 
 - name: Restart Kibana before proceeding
   meta: flush_handlers
+  tags:
+    - kibana-install
 
 - name: Wait for Kibana port
   wait_for:
     host: "127.0.0.1"
     port: "{{ kibana_app_port }}"
+  tags:
+    - kibana-install
 
 - name: create self-signed SSL cert
   command: >
@@ -54,6 +64,7 @@
   when: kibana_self_signed is defined and kibana_self_signed == true
   tags:
     - kibana-self-signed-cert
+    - kibana-install
 
 - name: Enable apache modules
   command: a2enmod "{{ item }}"
@@ -61,6 +72,7 @@
   tags:
     - kibana-apache-modules
     - kibana-apache
+    - kibana-install
 
 - name: Template Kibana Apache Config
   template:
@@ -73,6 +85,7 @@
   notify: Restart Apache
   tags:
     - kibana-apache
+    - kibana-install
 
 - name: Drop Apache2 Ports File
   template:
@@ -85,6 +98,7 @@
   notify: Restart Apache
   tags:
     - kibana-apache
+    - kibana-install
 
 - name: Link Kibana Site
   file:
@@ -96,6 +110,7 @@
   notify: Restart Apache
   tags:
     - kibana-apache
+    - kibana-install
 
 - name: Remove Apache Default Site
   file:
@@ -104,6 +119,7 @@
   notify: Restart Apache
   tags:
     - kibana-apache
+    - kibana-install
 
 - name: Create kibana http_auth user
   htpasswd:
@@ -118,3 +134,4 @@
   notify: Restart Apache
   tags:
     - kibana-apache
+    - kibana-install
