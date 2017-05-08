@@ -71,6 +71,6 @@
 - name: Verify ElasticSearch version
   fail:
     msg: "Incorrect version of ElasticSearch {{ escontent.json.version.number }} is installed."
-  when: escontent.json.version.number != '2.4.1'
+  when: escontent.json.version.number != '5.4.0'
   tags:
     - elasticsearch-version
